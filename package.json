@@ -1,5 +1,5 @@
 {
-  "name": "devops-cicd-pipeline-demo",
+  "name": "devops-cicd-pipeline",
   "version": "1.0.0",
   "description": "Projeto CI/CD DevOps",
   "main": "server.js",

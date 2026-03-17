@@ -2,10 +2,10 @@ const request = require("supertest");
 const app = require("../src/app");
 
 describe("GET /", () => {
-  it("should return Hello DevOps 🚀", async () => {
+  it("should return Hello WORLD!!", async () => {
     const res = await request(app).get("/");
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.message).toBe("Hello DevOps 🚀");
+    expect(res.body.message).toBe("Hello WORLD!!");
   });
 });
