@@ -9,29 +9,41 @@ Projeto demonstrando um pipeline completo de CI/CD utilizando Node.js, Docker e 
 Este projeto foi criado para demonstrar habilidades práticas de DevOps, incluindo:
 
 Integração Contínua (CI)
+
 Entrega Contínua (CD)
+
 Containerização com Docker
+
 Automação de pipeline com GitHub Actions
 
 🏗️ Arquitetura
 
 Developer (git push)
         ↓
+
 GitHub Actions (CI/CD)
         ↓
+
 Run Tests (Jest)
         ↓
+
 Build Docker Image
         ↓
+        
 Push to Docker Hub
 
 🛠️ Tecnologias utilizadas
 
 Node.js
+
 Express
+
 Docker
+
 GitHub Actions
+
 Jest (testes automatizados)
+
 Supertest
 
 📂 Estrutura do projeto
@@ -52,9 +64,13 @@ A pipeline é executada automaticamente a cada push na branch main.
 Etapas:
 
 Checkout do código
+
 Instalação de dependências
+
 Execução de testes automatizados
+
 Build da imagem Docker
+
 Push da imagem para Docker Hub
 
 🐳 Docker
@@ -76,6 +92,7 @@ npm test
 Para funcionamento completo da pipeline:
 
 DOCKER_USERNAME
+
 DOCKER_PASSWORD
 
 🚧 Deploy
@@ -83,8 +100,11 @@ DOCKER_PASSWORD
 O deploy via SSH foi configurado no pipeline, porém requer:
 
 Servidor com Docker instalado
+
 Acesso SSH configurado
+
 Porta 22 liberada
+
 Por padrão, essa etapa pode estar desabilitada para evitar falhas em ambientes sem servidor.
 
 💡 Aprendizados
@@ -92,17 +112,25 @@ Por padrão, essa etapa pode estar desabilitada para evitar falhas em ambientes 
 Durante o desenvolvimento deste projeto foram aplicados conceitos importantes de DevOps:
 
 Automação de pipelines
+
 Debug de erros em CI/CD
+
 Gerenciamento de dependências
+
 Containerização de aplicações
+
 Integração com registries Docker
 
 📈 Melhorias futuras
 
 Deploy automático em cloud (AWS, Render, etc.)
+
 Integração com Kubernetes
+
 Monitoramento com Prometheus e Grafana
+
 Versionamento de imagens Docker
+
 Pipeline multi-stage
 
 👨‍💻 Autor
