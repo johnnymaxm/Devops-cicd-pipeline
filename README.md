@@ -1,142 +1,201 @@
-# Devops-cicd-pipeline
+## DevOps CI/CD Pipeline com Node.js, Docker e GitHub Actions
 
-🚀 DevOps CI/CD Pipeline
+Este repositório demonstra um projeto prático de **CI/CD** aplicado a uma API simples em Node.js, com foco em boas práticas de automação para entrega contínua.
 
-Projeto demonstrando um pipeline completo de CI/CD utilizando Node.js, Docker e GitHub Actions.
+A proposta é servir como portfólio técnico para mostrar:
+- como estruturar uma aplicação mínima para testes e deploy;
+- como automatizar validações com GitHub Actions;
+- como versionar, buildar e publicar imagem Docker para distribuição.
 
-📌 Objetivo
+---
 
-Este projeto foi criado para demonstrar habilidades práticas de DevOps, incluindo:
+## Visão Geral do Projeto
 
-Integração Contínua (CI)
+O projeto expõe um endpoint HTTP com Express:
+- `GET /` -> retorna `{"message":"Hello WORLD!!"}`
 
-Entrega Contínua (CD)
+Mesmo sendo uma API simples, ele foi desenhado para demonstrar um fluxo DevOps real:
+- código versionado no GitHub;
+- testes automatizados com Jest + Supertest;
+- pipeline CI/CD no GitHub Actions;
+- build e push de imagem Docker para Docker Hub.
 
-Containerização com Docker
+---
 
-Automação de pipeline com GitHub Actions
+## Objetivo (Portfólio)
 
-🏗️ Arquitetura
+Este projeto é ideal para demonstrar competências em:
+- Node.js para backend básico;
+- testes automatizados de API;
+- conteinerização com Docker;
+- automação de integração e entrega contínua (CI/CD);
+- uso de secrets no GitHub Actions para autenticação segura.
 
-Developer (git push)
-        ↓
+---
 
-GitHub Actions (CI/CD)
-        ↓
+## Arquitetura e Estrutura
 
-Run Tests (Jest)
-        ↓
+Estrutura principal:
 
-Build Docker Image
-        ↓
-        
-Push to Docker Hub
-
-🛠️ Tecnologias utilizadas
-
-Node.js
-
-Express
-
-Docker
-
-GitHub Actions
-
-Jest (testes automatizados)
-
-Supertest
-
-📂 Estrutura do projeto
+```text
 .
-├── src/
-│   └── app.js
-├── test/
-│   └── app.test.js
-├── Dockerfile
-├── package.json
-└── .github/workflows/
-    └── ci-cd.yml
+├── .github/workflows/ci-cd.yml   # Pipeline CI/CD
+├── src/app.js                    # App Express (rotas)
+├── server.js                     # Inicialização do servidor
+├── test/app.test.js              # Testes automatizados
+├── Dockerfile                    # Imagem da aplicação
+├── package.json                  # Scripts e dependências
+└── README.md
+```
 
-⚙️ Pipeline CI/CD
+Fluxo resumido:
+1. Desenvolvedor envia código para `main`.
+2. GitHub Actions instala dependências e roda testes.
+3. Pipeline faz build da imagem Docker.
+4. Pipeline publica a imagem no Docker Hub.
+5. (Opcional) etapa de deploy via SSH pode ser ativada.
 
-A pipeline é executada automaticamente a cada push na branch main.
+---
 
-Etapas:
+## Tecnologias Utilizadas
 
-Checkout do código
+- **Node.js 18**
+- **Express**
+- **Jest**
+- **Supertest**
+- **Docker**
+- **GitHub Actions**
 
-Instalação de dependências
+---
 
-Execução de testes automatizados
+## Onde este projeto é usado
 
-Build da imagem Docker
+Este projeto pode ser usado como:
+- template inicial para pipelines DevOps de APIs Node.js;
+- laboratório para estudar CI/CD na prática;
+- base para entrevistas técnicas e apresentação de portfólio;
+- ponto de partida para evoluir para ambientes de staging/produção.
 
-Push da imagem para Docker Hub
+---
 
-🐳 Docker
+## Pré-requisitos
 
-Build da imagem
-docker build -t devops .
-Rodar container
-docker run -p 3000:3000 devops
+Para rodar localmente, instale:
 
-🧪 Testes
+- [Node.js 18+](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) (já vem com Node.js)
+- [Docker](https://www.docker.com/) (opcional, para execução em container)
+- [Git](https://git-scm.com/)
 
-Executar testes localmente:
+---
 
+## Como Executar Localmente (sem Docker)
+
+1. Clone o repositório:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd Devops-cicd-pipeline
+```
+
+2. Instale as dependências:
+
+```bash
 npm install
+```
+
+3. Execute os testes:
+
+```bash
 npm test
+```
 
-🔐 Variáveis de ambiente (GitHub Secrets)
+4. Inicie a aplicação:
 
-Para funcionamento completo da pipeline:
+```bash
+npm start
+```
 
-DOCKER_USERNAME
+5. Acesse no navegador ou via curl:
 
-DOCKER_PASSWORD
+- URL: `http://localhost:3000/`
+- Exemplo:
 
-🚧 Deploy
+```bash
+curl http://localhost:3000/
+```
 
-O deploy via SSH foi configurado no pipeline, porém requer:
+Resposta esperada:
 
-Servidor com Docker instalado
+```json
+{"message":"Hello WORLD!!"}
+```
 
-Acesso SSH configurado
+---
 
-Porta 22 liberada
+## Como Executar com Docker
 
-Por padrão, essa etapa pode estar desabilitada para evitar falhas em ambientes sem servidor.
+1. Build da imagem:
 
-💡 Aprendizados
+```bash
+docker build -t devops-cicd-pipeline:latest .
+```
 
-Durante o desenvolvimento deste projeto foram aplicados conceitos importantes de DevOps:
+2. Rodar container:
 
-Automação de pipelines
+```bash
+docker run -d -p 3000:3000 --name devops-app devops-cicd-pipeline:latest
+```
 
-Debug de erros em CI/CD
+3. Testar endpoint:
 
-Gerenciamento de dependências
+```bash
+curl http://localhost:3000/
+```
 
-Containerização de aplicações
+4. Parar e remover container:
 
-Integração com registries Docker
+```bash
+docker stop devops-app && docker rm devops-app
+```
 
-📈 Melhorias futuras
+---
 
-Deploy automático em cloud (AWS, Render, etc.)
+## Pipeline CI/CD (GitHub Actions)
 
-Integração com Kubernetes
+Arquivo: `.github/workflows/ci-cd.yml`
 
-Monitoramento com Prometheus e Grafana
+A pipeline é acionada em push na branch `main` e executa:
+1. Checkout do código
+2. Setup do Node 18
+3. Instalação de dependências
+4. Execução de testes
+5. Build da imagem Docker
+6. Login no Docker Hub (via secrets)
+7. Push da imagem
 
-Versionamento de imagens Docker
+### Secrets necessários no GitHub
 
-Pipeline multi-stage
+Configure no repositório:
+- `DOCKER_USERNAME`
+- `DOCKER_PASSWORD`
 
-👨‍💻 Autor
+Para habilitar deploy remoto (se desejar), também seriam necessários:
+- `SERVER_HOST`
+- `SSH_KEY`
 
-Projeto desenvolvido como parte de estudos em DevOps.
+---
 
-⭐ Conclusão
+## Melhorias Futuras
 
-Este projeto representa um fluxo real de CI/CD utilizado em ambientes profissionais, demonstrando desde testes automatizados até entrega de artefatos via Docker.
+- adicionar versionamento semântico de imagens (`v1.0.0`, `latest`);
+- incluir lint e análise de qualidade no pipeline;
+- ativar deploy automático em VPS/Kubernetes;
+- adicionar endpoint de health check (`/health`);
+- criar variáveis de ambiente com `.env`.
+
+---
+
+## Autor
+
+Projeto desenvolvido por **Johnny Max** como estudo e demonstração de práticas de **DevOps + CI/CD** aplicadas a aplicações Node.js.
